@@ -1,0 +1,20 @@
+Attack Type Classification Report
+==================================================
+
+Classes tested: Bot, Brute Force, DDoS, DoS, Heartbleed, Infiltration, Port Scan, Web Attack
+Number of samples: 14534
+
+              precision    recall  f1-score   support
+
+         Bot      0.984     0.984     0.984        62
+ Brute Force      1.000     0.993     0.997       303
+        DDoS      0.999     0.999     0.999      3845
+         DoS      1.000     1.000     1.000      5918
+  Heartbleed      1.000     1.000     1.000         1
+Infiltration      1.000     1.000     1.000         1
+   Port Scan      1.000     1.000     1.000      4333
+  Web Attack      0.986     1.000     0.993        71
+
+    accuracy                          1.000     14534
+   macro avg      0.996     0.997     0.997     14534
+weighted avg      1.000     1.000     1.000     14534

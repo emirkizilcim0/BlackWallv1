@@ -1,0 +1,13 @@
+Model: gaussian_nb
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.904     0.942     0.923     66748
+      Attack      0.672     0.543     0.601     14627
+
+    accuracy                          0.870     81375
+   macro avg      0.788     0.743     0.762     81375
+weighted avg      0.862     0.870     0.865     81375
+
+ROC-AUC: 0.919

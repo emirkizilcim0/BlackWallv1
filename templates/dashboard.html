@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACKWALL // NETWATCH SECURITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-red: #ff003c;
+            --dark-red: #8b0000;
+            --blood-red: #cc0000;
+            --matrix-green: #00ff41;
+            --bright-green: #00cc00;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --panel-bg: rgba(20, 0, 0, 0.8);
+            --border-red: #330000;
+            --text-glow: 0 0 10px currentColor;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 60, 0.1) 0%, transparent 50%),
+                url("static/images/background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated scanlines */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 0, 60, 0.03) 2px,
+                rgba(255, 0, 60, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlines 1s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-red);
+            position: relative;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--deep-red), transparent);
+        }
+
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--deep-red), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--text-glow);
+        }
+
+        .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: var(--matrix-green);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .security-level {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--matrix-green);
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Panels */
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+        }
+
+        .panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--deep-red), transparent);
+        }
+
+        .panel-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--deep-red);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-title::before {
+            content: "■";
+            color: var(--matrix-green);
+            font-size: 0.8em;
+        }
+
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .status-item {
+            background: rgba(30, 0, 0, 0.6);
+            padding: 18px;
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .status-item:hover::before {
+            left: 100%;
+        }
+
+        .status-item:hover {
+            border-color: var(--deep-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        }
+
+        .status-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .status-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--deep-red);
+        }
+
+        .status-value.safe {
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        .status-value.warning {
+            color: var(--blood-red);
+            text-shadow: 0 0 10px var(--blood-red);
+        }
+
+        .status-value.critical {
+            color: var(--deep-red);
+            text-shadow: 0 0 15px var(--deep-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Prediction Grid */
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .model-card {
+            background: rgba(25, 0, 0, 0.7);
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .model-card:hover::before {
+            left: 100%;
+        }
+
+        .model-card:hover {
+            border-color: var(--deep-red);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+        }
+
+        .model-card.threat-detected {
+            border-color: var(--blood-red);
+            background: rgba(50, 0, 0, 0.9);
+            box-shadow: 0 0 25px rgba(204, 0, 0, 0.5);
+        }
+
+        .model-card.safe {
+            border-color: var(--matrix-green);
+            background: rgba(0, 25, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .model-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .model-card.threat-detected .model-name {
+            color: var(--blood-red);
+        }
+
+        .model-card.safe .model-name {
+            color: var(--matrix-green);
+        }
+
+        .prediction-status {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .status-threat {
+            color: var(--blood-red);
+            background: rgba(204, 0, 0, 0.15);
+            border: 1px solid var(--blood-red);
+            text-shadow: 0 0 10px var(--blood-red);
+        }
+
+        .status-safe {
+            color: var(--matrix-green);
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        .confidence {
+            font-size: 0.85rem;
+            color: #666;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+        }
+
+        .model-card.threat-detected .confidence {
+            color: var(--blood-red);
+        }
+
+        .model-card.safe .confidence {
+            color: var(--matrix-green);
+        }
+
+        /* Controls */
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .cyber-button {
+            background: rgba(40, 0, 0, 0.8);
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            padding: 15px 20px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--deep-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+
+        .cyber-button:hover {
+            border-color: var(--deep-red);
+            background: rgba(60, 0, 0, 0.9);
+            color: var(--deep-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .cyber-button:active {
+            transform: translateY(1px);
+        }
+
+        .button-normal {
+            border-color: var(--matrix-green);
+            color: var(--matrix-green);
+        }
+
+        .button-normal:hover {
+            border-color: var(--matrix-green);
+            color: var(--matrix-green);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+        }
+
+        .button-attack {
+            border-color: var(--blood-red);
+            color: var(--blood-red);
+            background: rgba(60, 0, 0, 0.9);
+        }
+
+        /* Log Container */
+        .log-container {
+            height: 300px;
+            overflow-y: auto;
+            background: rgba(10, 0, 0, 0.8);
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-left: 3px solid var(--border-red);
+            padding-left: 15px;
+            background: rgba(20, 0, 0, 0.5);
+            animation: logEntry 0.5s ease;
+        }
+
+        @keyframes logEntry {
+            from { 
+                opacity: 0; 
+                transform: translateX(-10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .log-timestamp {
+            color: var(--matrix-green);
+            font-weight: 600;
+        }
+
+        .log-message {
+            color: #ccc;
+            margin-left: 10px;
+        }
+
+        .log-warning {
+            border-left-color: var(--blood-red);
+            background: rgba(40, 0, 0, 0.7);
+        }
+
+        .log-warning .log-message {
+            color: var(--blood-red);
+        }
+
+        .log-error {
+            border-left-color: var(--deep-red);
+            background: rgba(60, 0, 0, 0.8);
+        }
+
+        .log-error .log-message {
+            color: var(--deep-red);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            border-top: 1px solid var(--border-red);
+            position: relative;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--deep-red), transparent);
+        }
+
+        .corporate-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            color: var(--deep-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .panel {
+                padding: 20px;
+            }
+            
+            .status-grid,
+            .prediction-grid,
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 0, 0, 0.4);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--deep-red);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--blood-red);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="main-title">BLACKWALL</h1>
+            <p class="subtitle">NETWATCH SECURITY MATRIX</p>
+            <div class="security-level">SECURITY LEVEL: MAXIMUM</div>
+        </div>
+
+        <!-- System Status -->
+        <div class="panel">
+            <h2 class="panel-title">SYSTEM STATUS</h2>
+            <div id="systemStatus" class="status-value">BOOTING...</div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-label">DEFENSE MODULES</div>
+                    <div id="modulesStatus" class="status-value">-</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">THREAT LEVEL</div>
+                    <div id="threatLevel" class="status-value safe">NOMINAL</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">NETWORK INTEGRITY</div>
+                    <div id="networkIntegrity" class="status-value safe">100%</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">LAST SCAN</div>
+                    <div id="lastScan" class="status-value">--:--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Threat Assessment -->
+        <div class="panel">
+            <h2 class="panel-title">THREAT ASSESSMENT MATRIX</h2>
+            <div id="predictionResults">
+                <div style="text-align: center; color: #666; font-style: italic; padding: 30px;">
+                    AWAITING NETWORK DATA INPUT
+                </div>
+                <div class="prediction-grid" id="predictionGrid">
+                    <!-- Prediction cards will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="panel">
+            <h2 class="panel-title">SYSTEM CONTROLS</h2>
+            <div class="control-grid">
+                <button class="cyber-button button-normal" onclick="testNormal()">
+                    SCAN NORMAL
+                </button>
+                <button class="cyber-button button-attack" onclick="testAttack()">
+                    TEST THREAT
+                </button>
+                <button class="cyber-button" onclick="startRealtime()" id="startRealtimeBtn">
+                    LIVE MONITOR
+                </button>
+                <button class="cyber-button" onclick="stopRealtime()" id="stopRealtimeBtn" style="display: none;">
+                    STOP MONITOR
+                </button>
+            </div>
+        </div>
+
+        <!-- Threat Simulation -->
+        <div class="panel">
+            <h2 class="panel-title">THREAT SIMULATION CONTROLS</h2>
+            <div class="control-grid">
+                <button class="cyber-button button-attack" onclick="enableThreatMode()" id="enableThreatsBtn">
+                    ENABLE THREATS
+                </button>
+                <button class="cyber-button" onclick="disableThreatMode()" id="disableThreatsBtn" style="display: none;">
+                    DISABLE THREATS
+                </button>
+                <button class="cyber-button button-attack" onclick="injectThreat('port_scan')">
+                    PORT SCAN
+                </button>
+                <button class="cyber-button button-attack" onclick="injectThreat('syn_flood')">
+                    SYN FLOOD
+                </button>
+                <button class="cyber-button button-attack" onclick="injectThreat('ddos')">
+                    DDoS
+                </button>
+                <button class="cyber-button" onclick="clearLog()">
+                    PURGE LOGS
+                </button>
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <span id="threatStatus" class="status-value" style="font-size: 0.9rem;">Threat Simulation: INACTIVE</span>
+            </div>
+        </div>
+
+        <!-- Security Log -->
+        <div class="panel">
+            <h2 class="panel-title">SECURITY LOG</h2>
+            <div class="log-container" id="defenseLog">
+                <div class="log-entry">
+                    <span class="log-timestamp">[SYSTEM BOOT]</span>
+                    <span class="log-message">Initializing BlackWall defense protocols...</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-timestamp">[SYSTEM BOOT]</span>
+                    <span class="log-message">Neural network cores coming online...</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-timestamp">[SYSTEM BOOT]</span>
+                    <span class="log-message">All security modules active. Monitoring network.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="corporate-logo">NETWATCH INTERNATIONAL</div>
+            <div class="copyright">PROPRIETARY TECHNOLOGY // UNAUTHORIZED ACCESS PROHIBITED</div>
+        </div>
+    </div>
+
+    <script>
+        // System initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSystemTime();
+            setInterval(updateSystemTime, 1000);
+            checkSystemStatus();
+            checkThreatStatus();
+            addLog("System boot sequence complete", "system");
+            addLog("All defense protocols engaged", "system");
+        });
+
+        // Update system time
+        function updateSystemTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('lastScan').textContent = timeString;
+        }
+
+        // Update button states
+        function updateRealtimeButtons(starting) {
+            const startBtn = document.getElementById('startRealtimeBtn');
+            const stopBtn = document.getElementById('stopRealtimeBtn');
+            
+            if (starting) {
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'block';
+            } else {
+                startBtn.style.display = 'block';
+                stopBtn.style.display = 'none';
+            }
+        }
+
+        // Check system status
+        async function checkSystemStatus() {
+            try {
+                const response = await fetch('/system_status');
+                const data = await response.json();
+                
+                const statusElement = document.getElementById('systemStatus');
+                if (data.models_loaded) {
+                    statusElement.textContent = "OPERATIONAL";
+                    statusElement.className = "status-value safe";
+                    document.getElementById('modulesStatus').textContent = data.models_count + ' ACTIVE';
+                    addLog("Defense matrix operational - " + data.models_count + " modules active", "system");
+                } else {
+                    statusElement.textContent = "OFFLINE";
+                    statusElement.className = "status-value warning";
+                    addLog("WARNING: Defense modules offline", "warning");
+                }
+            } catch (error) {
+                addLog("CRITICAL: Cannot reach security core", "error");
+            }
+        }
+
+        // Test functions
+function testNormal() {
+    const normalData = {
+        'Fwd Packet Length Mean': 350.0,    // Smaller packets
+        'Fwd Packet Length Std': 120.0,     // More variation
+        'Bwd Packet Length Mean': 280.0,    // Balanced responses
+        'Bwd Packet Length Std': 95.0,
+        'Flow Bytes/s': 50000.0,            // Lower bandwidth
+        'Flow Packets/s': 80.0,             // Lower packet rate
+        'Flow IAT Mean': 15.0,              // Slower timing
+        'Flow IAT Std': 8.0,
+        'Fwd IAT Mean': 16.0,
+        'Fwd IAT Std': 9.0,
+        'Bwd IAT Mean': 14.0,
+        'Bwd IAT Std': 7.0,
+        'Fwd Packets/s': 40.0,
+        'Bwd Packets/s': 40.0,
+        'Packet Length Mean': 315.0,
+        'Packet Length Std': 110.0,
+        'Packet Length Variance': 12100.0,
+        'Average Packet Size': 315.0,
+        'Avg Fwd Segment Size': 350.0,
+        'Avg Bwd Segment Size': 280.0,
+        'Active Mean': 15.0,
+        'Active Std': 8.0,
+        'Idle Mean': 30.0,                  // Shorter idle times
+        'Idle Std': 15.0
+    };
+    
+    addLog("🔄 SCANNING: Normal web browsing traffic pattern", "system");
+    makePrediction(normalData, "NORMAL_WEB_BROWSING");
+}
+
+function testAttack() {
+    const attackData = {
+        'Fwd Packet Length Mean': 1500.0,   // Very large packets
+        'Fwd Packet Length Std': 10.0,      // Very consistent
+        'Bwd Packet Length Mean': 0.0,      // No responses
+        'Bwd Packet Length Std': 0.0,
+        'Flow Bytes/s': 5000000.0,          // Massive bandwidth
+        'Flow Packets/s': 10000.0,          // Huge packet rate
+        'Flow IAT Mean': 0.0001,            // Extremely fast
+        'Flow IAT Std': 0.00001,
+        'Fwd IAT Mean': 0.0001,
+        'Fwd IAT Std': 0.00001,
+        'Bwd IAT Mean': 0.0,
+        'Bwd IAT Std': 0.0,
+        'Fwd Packets/s': 10000.0,
+        'Bwd Packets/s': 0.0,
+        'Packet Length Mean': 1500.0,
+        'Packet Length Std': 10.0,
+        'Packet Length Variance': 100.0,
+        'Average Packet Size': 1500.0,
+        'Avg Fwd Segment Size': 1500.0,
+        'Avg Bwd Segment Size': 0.0,
+        'Active Mean': 0.0001,
+        'Active Std': 0.00001,
+        'Idle Mean': 0.0,                   // No idle time
+        'Idle Std': 0.0
+    };
+    
+    addLog("🚨 TESTING: Extreme DDoS attack pattern", "warning");
+    makePrediction(attackData, "EXTREME_DDoS_ATTACK");
+}
+
+async function fetchRealtimePredictions() {
+    if (!isRealtimeActive) return;
+    try {
+        const res = await fetch('/get_realtime_predictions', { cache: 'no-store' });
+        const data = await res.json();
+        if (!data.predictions || data.predictions.length === 0) return;
+
+        const latest = data.predictions[data.predictions.length - 1];
+        if (!latest.model_predictions) return;
+
+        displayPredictions(latest.model_predictions, `REALTIME (${latest.final_decision || 'UNKNOWN'})`);
+        updateThreatLevel(latest.model_predictions);
+        console.debug("Realtime predictions updated", latest);
+    } catch (err) {
+        console.error("Realtime prediction fetch failed", err);
+    }
+}
+
+        let realtimePolling = null;
+        let isRealtimeActive = false;
+
+        // Start real-time monitoring
+        async function startRealtime() {
+            try {
+                updateRealtimeButtons(true);
+                isRealtimeActive = true;
+                const response = await fetch('/start_realtime', { 
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog("Live network monitoring activated", "system");
+                    addLog("Real-time threat detection enabled", "system");
+                    document.getElementById('threatLevel').textContent = 'MONITORING';
+                    document.getElementById('threatLevel').className = 'status-value';
+                    
+                    startRealtimePolling();
+                    isRealtimeActive = true;
+                } else {
+                    addLog("ERROR: " + data.message, "error");
+                }
+            } catch (error) {
+                addLog("NETWORK ERROR: Cannot activate live monitoring", "error");
+            }
+        }
+
+        // Real-time log polling
+        function startRealtimePolling() {
+            if (realtimePolling) clearInterval(realtimePolling);
+            
+            realtimePolling = setInterval(async () => {
+                try {
+                    const response = await fetch('/get_realtime_logs');
+                    const data = await response.json();
+                    
+                    if (data.logs && data.logs.length > 0) {
+                        data.logs.forEach(log => {
+                            addLog(log.message, log.type);
+                        });
+                    }
+
+                    await fetchRealtimePredictions();
+                    
+                    // Check if real-time is still running
+                    const statusResponse = await fetch('/system_status');
+                    const statusData = await statusResponse.json();
+                    isRealtimeActive = statusData.realtime_running;
+                    
+                    if (!statusData.realtime_running) {
+                        addLog("Live monitoring stopped", "system");
+                        isRealtimeActive = false;
+                        clearInterval(realtimePolling);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error fetching logs:', error);
+                }
+            }, 2000);
+        }
+
+        // Stop real-time monitoring
+        async function stopRealtime() {
+            try {
+                updateRealtimeButtons(false);
+                const response = await fetch('/stop_realtime', { 
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog("Live monitoring stopped", "system");
+                    isRealtimeActive = false;
+                    if (realtimePolling) {
+                        clearInterval(realtimePolling);
+                        realtimePolling = null;
+                    }
+                    document.getElementById('threatLevel').textContent = 'NOMINAL';
+                    document.getElementById('threatLevel').className = 'status-value safe';
+                }
+            } catch (error) {
+                addLog("ERROR: Failed to stop live monitoring", "error");
+            }
+        }
+
+        // Prediction function
+        async function makePrediction(inputData, description) {
+            try {
+                addLog("Analyzing: " + description, "system");
+                
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(inputData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    displayPredictions(result.predictions, description);
+                    updateThreatLevel(result.predictions);
+                } else {
+                    addLog("ANALYSIS ERROR: " + result.message, "error");
+                }
+            } catch (error) {
+                addLog("NETWORK ERROR: Cannot reach analysis core", "error");
+            }
+        }
+
+function displayPredictions(predictions, description) {
+    // Reset container and rebuild grid to remove placeholder text
+    const results = document.getElementById('predictionResults');
+    results.innerHTML = '';
+    
+    const grid = document.createElement('div');
+    grid.id = 'predictionGrid';
+    grid.className = 'prediction-grid';
+    results.appendChild(grid);
+    
+    let threatDetected = false;
+    let threatCount = 0;
+    
+    // Define model display names and order
+// Define model display names and order - ADD XGBoost
+const modelOrder = [
+    'logistic_regression', 'decision_tree', 'random_forest', 
+    'svm', 'gaussian_nb', 'knn', 'isolation_forest', 'xgboost'  // ADD 'xgboost' here
+];
+
+const modelDisplayNames = {
+    'logistic_regression': 'LOGISTIC REGRESSION',
+    'decision_tree': 'DECISION TREE',
+    'random_forest': 'RANDOM FOREST',
+    'svm': 'SUPPORT VECTOR MACHINE',
+    'gaussian_nb': 'GAUSSIAN NAIVE BAYES',
+    'knn': 'K-NEAREST NEIGHBORS',
+    'isolation_forest': 'ISOLATION FOREST',
+    'xgboost': 'XGBOOST'  // ADD THIS LINE
+};
+    
+    // Process predictions in defined order
+    modelOrder.forEach(modelName => {
+        if (predictions[modelName]) {
+            const prediction = predictions[modelName];
+            const isThreat = prediction.label === 'ATTACK';
+            if (isThreat) {
+                threatDetected = true;
+                threatCount++;
+            }
+            
+            const card = document.createElement('div');
+            card.className = `model-card ${isThreat ? 'threat-detected' : 'safe'}`;
+            card.innerHTML = `
+                <div class="model-name">${modelDisplayNames[modelName]}</div>
+                <div class="prediction-status ${isThreat ? 'status-threat' : 'status-safe'}">
+                    ${isThreat ? 'THREAT DETECTED' : 'CLEAR'}
+                </div>
+                <div class="confidence">CONFIDENCE: ${(prediction.confidence * 100).toFixed(1)}%</div>
+            `;
+            
+            grid.appendChild(card);
+            
+            // Log individual model results
+            if (isThreat) {
+                addLog("SECURITY ALERT: " + modelDisplayNames[modelName] + " detected threat - Confidence: " + (prediction.confidence * 100).toFixed(1) + "%", "warning");
+            } else {
+                addLog(modelDisplayNames[modelName] + " analysis: No threats detected", "system");
+            }
+        }
+    });
+    
+// Overall threat assessment
+    if (threatDetected) {
+        document.getElementById('threatLevel').textContent = 'ELEVATED';
+        document.getElementById('threatLevel').className = 'status-value warning';
+        addLog("ALERT: " + threatCount + " security modules detected threats", "warning");
+        
+        // Show which models detected threats
+        const threatModels = modelOrder.filter(model => 
+            predictions[model] && predictions[model].label === 'ATTACK'
+        ).map(model => modelDisplayNames[model]);
+        
+        addLog("Threat detection by: " + threatModels.join(', '), "warning");
+    } else {
+        document.getElementById('threatLevel').textContent = 'NOMINAL';
+        document.getElementById('threatLevel').className = 'status-value safe';
+        addLog("All security modules report clear - no threats detected", "system");
+    }
+}
+        function updateThreatLevel(predictions) {
+            const attackCount = Object.values(predictions).filter(p => p.label === 'ATTACK').length;
+            const totalModels = Object.keys(predictions).length;
+            
+            let threatLevel = 'NOMINAL';
+            let threatClass = 'safe';
+            
+            if (attackCount >= totalModels * 0.75) {
+                threatLevel = 'CRITICAL';
+                threatClass = 'critical';
+                addLog("CRITICAL THREAT LEVEL: Multiple security breaches detected!", "error");
+            } else if (attackCount >= totalModels * 0.5) {
+                threatLevel = 'HIGH';
+                threatClass = 'warning';
+            } else if (attackCount >= totalModels * 0.25) {
+                threatLevel = 'ELEVATED';
+                threatClass = 'warning';
+            }
+            
+            document.getElementById('threatLevel').textContent = threatLevel;
+            document.getElementById('threatLevel').className = `status-value ${threatClass}`;
+        }
+
+        function addLog(message, type = 'system') {
+            const logContainer = document.getElementById('defenseLog');
+            const timestamp = new Date().toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type === 'warning' ? 'log-warning' : type === 'error' ? 'log-error' : ''}`;
+            logEntry.innerHTML = `
+                <span class="log-timestamp">[${timestamp}]</span>
+                <span class="log-message">${message}</span>
+            `;
+            
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            
+            // Limit log entries
+            const logs = logContainer.querySelectorAll('.log-entry');
+            if (logs.length > 50) logs[0].remove();
+        }
+
+        // Threat simulation functions
+        async function enableThreatMode() {
+            try {
+                const response = await fetch('/enable_threat_mode', { 
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog("THREAT SIMULATION: Malicious traffic generation enabled", "warning");
+                    document.getElementById('enableThreatsBtn').style.display = 'none';
+                    document.getElementById('disableThreatsBtn').style.display = 'block';
+                    document.getElementById('threatStatus').textContent = 'Threat Simulation: ACTIVE';
+                    document.getElementById('threatStatus').className = 'status-value warning';
+                } else {
+                    addLog("ERROR: " + data.message, "error");
+                }
+            } catch (error) {
+                addLog("NETWORK ERROR: Cannot enable threat simulation", "error");
+            }
+        }
+
+        async function disableThreatMode() {
+            try {
+                const response = await fetch('/disable_threat_mode', { 
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog("THREAT SIMULATION: Malicious traffic generation disabled", "system");
+                    document.getElementById('enableThreatsBtn').style.display = 'block';
+                    document.getElementById('disableThreatsBtn').style.display = 'none';
+                    document.getElementById('threatStatus').textContent = 'Threat Simulation: INACTIVE';
+                    document.getElementById('threatStatus').className = 'status-value safe';
+                } else {
+                    addLog("ERROR: " + data.message, "error");
+                }
+            } catch (error) {
+                addLog("NETWORK ERROR: Cannot disable threat simulation", "error");
+            }
+        }
+
+        async function injectThreat(threatType) {
+            try {
+                const response = await fetch(`/inject_threat/${threatType}`, { 
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog("MANUAL THREAT: " + data.message, "warning");
+                } else {
+                    addLog("ERROR: " + data.message, "error");
+                }
+            } catch (error) {
+                addLog("NETWORK ERROR: Cannot inject threat", "error");
+            }
+        }
+
+        // Check threat status
+        async function checkThreatStatus() {
+            try {
+                const response = await fetch('/threat_status');
+                const data = await response.json();
+                
+                const enableBtn = document.getElementById('enableThreatsBtn');
+                const disableBtn = document.getElementById('disableThreatsBtn');
+                const statusElement = document.getElementById('threatStatus');
+                
+                if (data.threat_mode_enabled) {
+                    enableBtn.style.display = 'none';
+                    disableBtn.style.display = 'block';
+                    statusElement.textContent = 'Threat Simulation: ACTIVE';
+                    statusElement.className = 'status-value warning';
+                }
+            } catch (error) {
+                console.error('Error checking threat status:', error);
+            }
+        }
+
+        function clearLog() {
+            const logContainer = document.getElementById('defenseLog');
+            logContainer.innerHTML = `
+                <div class="log-entry">
+                    <span class="log-timestamp">[SYSTEM]</span>
+                    <span class="log-message">Security log purged. BlackWall defense active.</span>
+                </div>
+            `;
+            addLog("System monitoring network traffic", "system");
+        }
+
+        // Periodic status updates
+        setInterval(() => {
+            if (Math.random() < 0.03) {
+                const messages = [
+                    "Network integrity: 100%",
+                    "All encryption protocols active",
+                    "No unauthorized access attempts",
+                    "System performance: optimal",
+                    "Firewall integrity: maximum"
+                ];
+                addLog(messages[Math.floor(Math.random() * messages.length)], "system");
+            }
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+Model: logistic_regression
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.989     0.942     0.965     66748
+      Attack      0.783     0.951     0.859     14627
+
+    accuracy                          0.944     81375
+   macro avg      0.886     0.947     0.912     81375
+weighted avg      0.952     0.944     0.946     81375
+
+ROC-AUC: 0.981

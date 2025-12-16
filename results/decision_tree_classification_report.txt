@@ -1,0 +1,13 @@
+Model: decision_tree
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.997     0.989     0.993     66748
+      Attack      0.953     0.985     0.969     14627
+
+    accuracy                          0.989     81375
+   macro avg      0.975     0.987     0.981     81375
+weighted avg      0.989     0.989     0.989     81375
+
+ROC-AUC: 0.993

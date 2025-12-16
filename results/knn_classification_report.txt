@@ -1,0 +1,13 @@
+Model: knn
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.994     0.992     0.993     66748
+      Attack      0.964     0.974     0.969     14627
+
+    accuracy                          0.989     81375
+   macro avg      0.979     0.983     0.981     81375
+weighted avg      0.989     0.989     0.989     81375
+
+ROC-AUC: 0.996

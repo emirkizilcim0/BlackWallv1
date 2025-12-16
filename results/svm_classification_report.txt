@@ -1,0 +1,13 @@
+Model: svm
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.000     0.000     0.000     66748
+      Attack      0.180     1.000     0.305     14627
+
+    accuracy                          0.180     81375
+   macro avg      0.090     0.500     0.152     81375
+weighted avg      0.032     0.180     0.055     81375
+
+ROC-AUC: 0.404

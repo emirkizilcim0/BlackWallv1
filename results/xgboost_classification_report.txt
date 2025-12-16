@@ -1,0 +1,13 @@
+Model: xgboost
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.999     0.991     0.995     66748
+      Attack      0.959     0.993     0.976     14627
+
+    accuracy                          0.991     81375
+   macro avg      0.979     0.992     0.985     81375
+weighted avg      0.991     0.991     0.991     81375
+
+ROC-AUC: 1.000

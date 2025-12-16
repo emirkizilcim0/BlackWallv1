@@ -1,0 +1,13 @@
+Model: isolation_forest
+==================================================
+
+              precision    recall  f1-score   support
+
+      Normal      0.883     0.697     0.779     66748
+      Attack      0.295     0.580     0.391     14627
+
+    accuracy                          0.676     81375
+   macro avg      0.589     0.638     0.585     81375
+weighted avg      0.778     0.676     0.709     81375
+
+ROC-AUC: 0.716
