@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Debug script to check model performance and calibration
-"""
-
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))

@@ -1,0 +1,52 @@
+Feature Importances - RandomForest (10-shot)
+============================================================
+Destination Port: 0.051563
+Init_Win_bytes_backward: 0.036756
+Flow Packets/s: 0.036161
+Average Packet Size: 0.035275
+Fwd Packet Length Max: 0.033552
+min_seg_size_forward: 0.032919
+Fwd Header Length.1: 0.032115
+Bwd Packets/s: 0.031537
+Fwd Packets/s: 0.030436
+iat_cov: 0.028451
+bytes_per_packet: 0.026798
+Avg Fwd Segment Size: 0.026215
+Flow Duration: 0.025907
+Fwd Header Length: 0.025413
+Bwd Header Length: 0.025253
+Fwd Packet Length Mean: 0.024496
+Flow IAT Min: 0.023463
+Packet Length Variance: 0.023397
+Flow IAT Max: 0.023085
+Packet Length Std: 0.022982
+Fwd Packet Length Std: 0.022863
+Flow IAT Std: 0.022419
+Packet Length Mean: 0.022217
+Fwd IAT Std: 0.020806
+Max Packet Length: 0.020599
+Total Backward Packets: 0.019945
+Fwd IAT Max: 0.019938
+act_data_pkt_fwd: 0.019590
+mean_packet_length_diff: 0.019320
+Fwd IAT Total: 0.019311
+Subflow Fwd Packets: 0.016810
+Idle Mean: 0.015993
+Total Fwd Packets: 0.014703
+Avg Bwd Segment Size: 0.014582
+Bwd Packet Length Mean: 0.014455
+Idle Min: 0.014276
+Subflow Bwd Bytes: 0.013376
+Init_Win_bytes_forward: 0.012770
+Subflow Bwd Packets: 0.011525
+Bwd Packet Length Max: 0.011049
+Total Length of Bwd Packets: 0.009028
+Bwd Packet Length Min: 0.008739
+Bwd IAT Total: 0.008434
+Idle Max: 0.007036
+PSH Flag Count: 0.006273
+Bwd Packet Length Std: 0.005957
+ACK Flag Count: 0.003982
+Min Packet Length: 0.003441
+Down/Up Ratio: 0.002744
+Fwd Packet Length Min: 0.002046

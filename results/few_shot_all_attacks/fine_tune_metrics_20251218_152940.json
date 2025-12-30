@@ -1,0 +1,25 @@
+{
+  "method": "fine_tune",
+  "accuracy": 0.10888888888888888,
+  "f1_score": 0.09091149644266953,
+  "n_samples": 450,
+  "n_classes": 15,
+  "class_distribution": {
+    "BENIGN": 30,
+    "DDoS": 30,
+    "PortScan": 30,
+    "Bot": 30,
+    "BruteForce": 30,
+    "WebAttack": 30,
+    "DoS": 30,
+    "FTP-Patator": 30,
+    "SSH-Patator": 30,
+    "Infiltration": 30,
+    "Heartbleed": 30,
+    "DoS Hulk": 30,
+    "DoS GoldenEye": 30,
+    "DoS slowloris": 30,
+    "DoS Slowhttptest": 30
+  },
+  "timestamp": "2025-12-18T15:29:40.345060"
+}

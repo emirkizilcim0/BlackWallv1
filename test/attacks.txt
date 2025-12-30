@@ -1,0 +1,322 @@
+// ==================== HARD TO DETECT ATTACKS (Stealthy) ====================
+
+function advancedPersistentThreat() {
+    const attackData = {
+        'Fwd Packet Length Mean': 245.0,    // Mimics normal HTTPS traffic
+        'Fwd Packet Length Std': 35.0,
+        'Bwd Packet Length Mean': 220.0,    // Normal response sizes
+        'Bwd Packet Length Std': 28.0,
+        'Flow Bytes/s': 45000.0,            // Low and steady
+        'Flow Packets/s': 85.0,
+        'Flow IAT Mean': 12.5,              // Human-like delays
+        'Flow IAT Std': 8.2,
+        'Fwd IAT Mean': 13.0,
+        'Fwd IAT Std': 8.5,
+        'Bwd IAT Mean': 12.0,
+        'Bwd IAT Std': 7.8,
+        'Fwd Packets/s': 45.0,
+        'Bwd Packets/s': 40.0,
+        'Packet Length Mean': 232.5,
+        'Packet Length Std': 32.0,
+        'Packet Length Variance': 1024.0,
+        'Average Packet Size': 232.5,
+        'Avg Fwd Segment Size': 245.0,
+        'Avg Bwd Segment Size': 220.0,
+        'Active Mean': 12.5,
+        'Active Std': 8.0,
+        'Idle Mean': 45.0,                  // Long idle periods
+        'Idle Std': 25.0
+    };
+    
+    addLog("🕵️ ADVANCED PERSISTENT THREAT: Stealthy long-term infiltration", "warning");
+    makePrediction(attackData, "ADVANCED_PERSISTENT_THREAT");
+}
+
+function dataExfiltration() {
+    const attackData = {
+        'Fwd Packet Length Mean': 1450.0,   // Max MTU sized packets
+        'Fwd Packet Length Std': 45.0,      // Very consistent
+        'Bwd Packet Length Mean': 52.0,     // Small ACKs
+        'Bwd Packet Length Std': 8.0,
+        'Flow Bytes/s': 75000.0,            // Moderate but consistent
+        'Flow Packets/s': 52.0,             // Calculated for max throughput
+        'Flow IAT Mean': 19.3,              // Regular intervals
+        'Flow IAT Std': 2.1,                // Very low variance
+        'Fwd IAT Mean': 19.5,
+        'Fwd IAT Std': 2.0,
+        'Bwd IAT Mean': 19.0,
+        'Bwd IAT Std': 2.2,
+        'Fwd Packets/s': 26.0,
+        'Bwd Packets/s': 26.0,
+        'Packet Length Mean': 751.0,
+        'Packet Length Std': 699.0,
+        'Packet Length Variance': 488601.0,
+        'Average Packet Size': 751.0,
+        'Avg Fwd Segment Size': 1450.0,
+        'Avg Bwd Segment Size': 52.0,
+        'Active Mean': 19.3,
+        'Active Std': 2.0,
+        'Idle Mean': 60.0,                  // Periodic bursts
+        'Idle Std': 5.0
+    };
+    
+    addLog("📤 DATA EXFILTRATION: Stealthy data theft over encrypted channels", "warning");
+    makePrediction(attackData, "DATA_EXFILTRATION");
+}
+
+function dnsTunneling() {
+    const attackData = {
+        'Fwd Packet Length Mean': 95.0,     // DNS query sizes
+        'Fwd Packet Length Std': 12.0,
+        'Bwd Packet Length Mean': 255.0,    // Large DNS responses
+        'Bwd Packet Length Std': 45.0,
+        'Flow Bytes/s': 12000.0,            // Low bandwidth
+        'Flow Packets/s': 35.0,
+        'Flow IAT Mean': 28.5,              // Sporadic timing
+        'Flow IAT Std': 15.2,
+        'Fwd IAT Mean': 29.0,
+        'Fwd IAT Std': 15.5,
+        'Bwd IAT Mean': 28.0,
+        'Bwd IAT Std': 14.8,
+        'Fwd Packets/s': 18.0,
+        'Bwd Packets/s': 17.0,
+        'Packet Length Mean': 175.0,
+        'Packet Length Std': 80.0,
+        'Packet Length Variance': 6400.0,
+        'Average Packet Size': 175.0,
+        'Avg Fwd Segment Size': 95.0,
+        'Avg Bwd Segment Size': 255.0,
+        'Active Mean': 28.5,
+        'Active Std': 15.0,
+        'Idle Mean': 120.0,                 // Long pauses
+        'Idle Std': 45.0
+    };
+    
+    addLog("🌐 DNS TUNNELING: Covert channel through DNS protocol", "warning");
+    makePrediction(attackData, "DNS_TUNNELING");
+}
+
+function slowlorisAttack() {
+    const attackData = {
+        'Fwd Packet Length Mean': 85.0,     // Partial HTTP requests
+        'Fwd Packet Length Std': 15.0,
+        'Bwd Packet Length Mean': 0.0,      // No complete responses
+        'Bwd Packet Length Std': 0.0,
+        'Flow Bytes/s': 800.0,              // Extremely low
+        'Flow Packets/s': 2.5,              // Very few packets
+        'Flow IAT Mean': 400.0,             // Very slow
+        'Flow IAT Std': 50.0,
+        'Fwd IAT Mean': 405.0,
+        'Fwd IAT Std': 52.0,
+        'Bwd IAT Mean': 0.0,
+        'Bwd IAT Std': 0.0,
+        'Fwd Packets/s': 2.5,
+        'Bwd Packets/s': 0.0,
+        'Packet Length Mean': 85.0,
+        'Packet Length Std': 15.0,
+        'Packet Length Variance': 225.0,
+        'Average Packet Size': 85.0,
+        'Avg Fwd Segment Size': 85.0,
+        'Avg Bwd Segment Size': 0.0,
+        'Active Mean': 400.0,
+        'Active Std': 50.0,
+        'Idle Mean': 10.0,
+        'Idle Std': 2.0
+    };
+    
+    addLog("🐌 SLOWLORIS ATTACK: Low-and-slow application layer DDoS", "warning");
+    makePrediction(attackData, "SLOWLORIS_ATTACK");
+}
+
+// ==================== EASY TO DETECT ATTACKS (Obvious) ====================
+
+function bruteForceAttack() {
+    const attackData = {
+        'Fwd Packet Length Mean': 65.0,     // Small auth packets
+        'Fwd Packet Length Std': 8.0,
+        'Bwd Packet Length Mean': 45.0,     // Small error responses
+        'Bwd Packet Length Std': 6.0,
+        'Flow Bytes/s': 250000.0,           // High rate
+        'Flow Packets/s': 2500.0,           // Massive packet count
+        'Flow IAT Mean': 0.004,             // Extremely rapid
+        'Flow IAT Std': 0.001,
+        'Fwd IAT Mean': 0.004,
+        'Fwd IAT Std': 0.001,
+        'Bwd IAT Mean': 0.004,
+        'Bwd IAT Std': 0.001,
+        'Fwd Packets/s': 1250.0,
+        'Bwd Packets/s': 1250.0,
+        'Packet Length Mean': 55.0,
+        'Packet Length Std': 11.0,
+        'Packet Length Variance': 121.0,
+        'Average Packet Size': 55.0,
+        'Avg Fwd Segment Size': 65.0,
+        'Avg Bwd Segment Size': 45.0,
+        'Active Mean': 0.004,
+        'Active Std': 0.001,
+        'Idle Mean': 0.0,                   // No breaks
+        'Idle Std': 0.0
+    };
+    
+    addLog("💥 BRUTE FORCE ATTACK: Rapid credential guessing attempts", "warning");
+    makePrediction(attackData, "BRUTE_FORCE_ATTACK");
+}
+
+function portScanning() {
+    const attackData = {
+        'Fwd Packet Length Mean': 58.0,     // SYN packets
+        'Fwd Packet Length Std': 2.0,       // Very consistent
+        'Bwd Packet Length Mean': 0.0,      // No responses (filtered)
+        'Bwd Packet Length Std': 0.0,
+        'Flow Bytes/s': 150000.0,
+        'Flow Packets/s': 2000.0,
+        'Flow IAT Mean': 0.5,               // Systematic scanning
+        'Flow IAT Std': 0.1,
+        'Fwd IAT Mean': 0.5,
+        'Fwd IAT Std': 0.1,
+        'Bwd IAT Mean': 0.0,
+        'Bwd IAT Std': 0.0,
+        'Fwd Packets/s': 2000.0,
+        'Bwd Packets/s': 0.0,
+        'Packet Length Mean': 58.0,
+        'Packet Length Std': 2.0,
+        'Packet Length Variance': 4.0,
+        'Average Packet Size': 58.0,
+        'Avg Fwd Segment Size': 58.0,
+        'Avg Bwd Segment Size': 0.0,
+        'Active Mean': 0.5,
+        'Active Std': 0.1,
+        'Idle Mean': 0.0,
+        'Idle Std': 0.0
+    };
+    
+    addLog("🔍 PORT SCANNING: Systematic network reconnaissance", "warning");
+    makePrediction(attackData, "PORT_SCANNING");
+}
+
+function synFlood() {
+    const attackData = {
+        'Fwd Packet Length Mean': 62.0,     // SYN packets
+        'Fwd Packet Length Std': 3.0,
+        'Bwd Packet Length Mean': 0.0,      // No SYN-ACKs
+        'Bwd Packet Length Std': 0.0,
+        'Flow Bytes/s': 5000000.0,          // Massive bandwidth
+        'Flow Packets/s': 80000.0,          // Huge packet rate
+        'Flow IAT Mean': 0.0000125,         // Extremely rapid
+        'Flow IAT Std': 0.000001,
+        'Fwd IAT Mean': 0.0000125,
+        'Fwd IAT Std': 0.000001,
+        'Bwd IAT Mean': 0.0,
+        'Bwd IAT Std': 0.0,
+        'Fwd Packets/s': 80000.0,
+        'Bwd Packets/s': 0.0,
+        'Packet Length Mean': 62.0,
+        'Packet Length Std': 3.0,
+        'Packet Length Variance': 9.0,
+        'Average Packet Size': 62.0,
+        'Avg Fwd Segment Size': 62.0,
+        'Avg Bwd Segment Size': 0.0,
+        'Active Mean': 0.0000125,
+        'Active Std': 0.000001,
+        'Idle Mean': 0.0,
+        'Idle Std': 0.0
+    };
+    
+    addLog("🌊 SYN FLOOD: Volumetric TCP state exhaustion attack", "warning");
+    makePrediction(attackData, "SYN_FLOOD");
+}
+
+function malwareC2() {
+    const attackData = {
+        'Fwd Packet Length Mean': 185.0,    // Encrypted C2 traffic
+        'Fwd Packet Length Std': 120.0,     // High variance
+        'Bwd Packet Length Mean': 245.0,    // Command responses
+        'Bwd Packet Length Std': 180.0,
+        'Flow Bytes/s': 85000.0,
+        'Flow Packets/s': 300.0,
+        'Flow IAT Mean': 3.3,               // Beaconing behavior
+        'Flow IAT Std': 1.5,
+        'Fwd IAT Mean': 3.5,
+        'Fwd IAT Std': 1.6,
+        'Bwd IAT Mean': 3.0,
+        'Bwd IAT Std': 1.4,
+        'Fwd Packets/s': 150.0,
+        'Bwd Packets/s': 150.0,
+        'Packet Length Mean': 215.0,
+        'Packet Length Std': 150.0,
+        'Packet Length Variance': 22500.0,
+        'Average Packet Size': 215.0,
+        'Avg Fwd Segment Size': 185.0,
+        'Avg Bwd Segment Size': 245.0,
+        'Active Mean': 3.3,
+        'Active Std': 1.5,
+        'Idle Mean': 600.0,                 // Regular beaconing
+        'Idle Std': 60.0
+    };
+    
+    addLog("🦠 MALWARE C2: Command and control beaconing activity", "warning");
+    makePrediction(attackData, "MALWARE_C2");
+}
+
+// ==================== ENHANCED DEMO FUNCTION ====================
+
+function comprehensiveAttackDemo() {
+    console.log("🎯 Starting Comprehensive Attack Demo (Mixed Difficulty)...");
+    
+    startRealtime();
+    
+    setTimeout(() => {
+        console.log("🔴 Phase 1: Easy Detection - Brute Force Attack");
+        bruteForceAttack();
+        
+        setTimeout(() => {
+            console.log("🔴 Phase 2: Hard Detection - Advanced Persistent Threat");
+            advancedPersistentThreat();
+            
+            setTimeout(() => {
+                console.log("🔴 Phase 3: Easy Detection - Port Scanning");
+                portScanning();
+                
+                setTimeout(() => {
+                    console.log("🔴 Phase 4: Hard Detection - Data Exfiltration");
+                    dataExfiltration();
+                    
+                    setTimeout(() => {
+                        console.log("🔴 Phase 5: Easy Detection - SYN Flood");
+                        synFlood();
+                        
+                        setTimeout(() => {
+                            console.log("🔴 Phase 6: Hard Detection - DNS Tunneling");
+                            dnsTunneling();
+                            
+                            setTimeout(() => {
+                                console.log("🔴 Phase 7: Mixed - Malware C2 & Slowloris");
+                                malwareC2();
+                                
+                                setTimeout(() => {
+                                    slowlorisAttack();
+                                    
+                                    setTimeout(() => {
+                                        console.log("🔴 Phase 8: Continuous Threat Simulation");
+                                        enableThreatMode();
+                                    }, 4000);
+                                    
+                                }, 3500);
+                                
+                            }, 3000);
+                            
+                        }, 3000);
+                        
+                    }, 3000);
+                    
+                }, 3000);
+                
+            }, 3000);
+            
+        }, 3000);
+        
+    }, 2000);
+}
+
+// Run comprehensive demo instead
+comprehensiveAttackDemo();

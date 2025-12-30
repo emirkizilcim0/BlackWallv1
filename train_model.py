@@ -6,10 +6,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import (accuracy_score, f1_score, roc_auc_score, 
-                           confusion_matrix, classification_report, precision_recall_curve,
+                           confusion_matrix, classification_report,
                            roc_curve)
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
 from utils.preprocessor import DataPreprocessor
 from config import CIC_DATA_DIR, MODELS_DIR, RESULTS_DIR, MODEL_CONFIG
 import warnings
@@ -22,7 +21,6 @@ from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
-from sklearn.feature_selection import SelectKBest, f_classif
 
 
 # Set style for better plots
