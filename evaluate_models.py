@@ -1,19 +1,3 @@
-#!/usr/bin/env python3
-"""
-Evaluate existing saved models (Logistic Regression, GaussianNB, IsolationForest)
-on a CIC-IDS-2017 style CSV. No training, no CLI needed; just run:
-
-    python evaluate_models.py
-
-Defaults:
-- Data: data/CIC_IDS_2017/Friday-WorkingHours-Morning.pcap_ISCX.csv
-- Label column: Label (BENIGN vs others → 0/1)
-- Models: models/logistic_regression.joblib, gaussian_nb.joblib, isolation_forest.joblib
-- Preprocessor: models/preprocessor.joblib (used to align/scale features)
-
-Outputs: classification report, F1, AUC-ROC, confusion matrix heatmap, ROC curve.
-"""
-
 import os
 from typing import Any, Dict
 

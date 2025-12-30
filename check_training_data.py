@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Check training data balance and model performance
-"""
-
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
